@@ -1,0 +1,2 @@
+const b=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAlUlEQVR42mPkFlJgoCVgYqAxYMEUcum6QImJe8oMkLmMyEFEodFYrUFYADf9aIMdJUZbNxxCtgM9Dig0HdMEJmTnU246sh0QMwciFeECVnUHGJmgDjo3Jeb7m0eDIh+MWjBqwagFoxaMWkDn+uBYk8NIjgNIEwPe4qAQQMzB3myh3A5k02nVskNuPTJitq5p2DalBQAA/qcumcEG8l8AAAAASUVORK5CYII=','base64');
+module.exports=(req,res)=>{res.setHeader('Content-Type','image/png');res.setHeader('Cache-Control','public, max-age=86400, s-maxage=604800');res.status(200).send(b)};

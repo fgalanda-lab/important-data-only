@@ -1,1 +1,1 @@
-{"cleanUrls":true}
+{"cleanUrls":true,"rewrites":[{"source":"/og-image.png","destination":"/api/img-og-image"},{"source":"/apple-touch-icon.png","destination":"/api/img-apple-touch-icon"},{"source":"/favicon.png","destination":"/api/img-favicon-32"}]}
