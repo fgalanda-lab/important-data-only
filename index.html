@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>IMPORTANT DATA ONLY</title><meta name="theme-color" content="#0b1220">
+<style>
+:root{--bg:#0b1220;--card:#141c2e;--bd:#2a3550;--mut:#8a94a8;--txt:#eef2f8;--blue:#4f9cf0;--red:#f05252;--grn:#2fd27a;--pur:#a78bfa;--org:#7a2e12}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(ellipse at top,#121a2e,#070b14);color:var(--txt);font-family:-apple-system,"Segoe UI",Roboto,"DejaVu Sans",sans-serif;min-height:100vh}
+.wrap{max-width:1800px;margin:0 auto;padding:clamp(12px,2vw,32px);display:flex;flex-direction:column;gap:clamp(10px,1.4vw,22px);min-height:100vh}
+header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px}
+h1{margin:0;color:var(--blue);font-size:clamp(24px,3.2vw,56px);letter-spacing:.5px;font-weight:800}
+.date{color:var(--mut);font-size:clamp(13px,1.3vw,22px)}
+.clock{font-size:clamp(40px,5.5vw,100px);font-weight:800;line-height:1}.clock small{font-size:.3em;color:var(--mut);margin-left:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:inherit;flex:1}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:clamp(14px,1.6vw,28px);position:relative;overflow:hidden}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.sym{font-size:clamp(22px,2.2vw,40px);font-weight:800}.nm{color:var(--mut);font-size:clamp(11px,1vw,17px);text-align:right}
+.stk{display:flex;gap:16px;align-items:center}.stk .l{flex:0 0 auto}.stk svg{flex:1;min-width:0;height:clamp(70px,9vw,160px)}
+.price{font-size:clamp(40px,4.8vw,88px);font-weight:800;line-height:1.1}
+.chg{font-size:clamp(16px,1.6vw,28px);font-weight:700;margin-top:4px}.up{color:var(--grn)}.dn{color:var(--red)}
+.foot{color:var(--mut);font-size:clamp(11px,.9vw,16px);margin-top:10px;display:flex;justify-content:space-between}
+.ttl{font-size:clamp(18px,1.8vw,32px);font-weight:700;margin-bottom:8px}
+.wx{display:flex;align-items:center;gap:clamp(10px,2vw,30px);flex-wrap:wrap}
+.tmp{font-size:clamp(56px,6vw,120px);font-weight:800;line-height:1}.desc{font-size:clamp(16px,1.5vw,26px);margin-top:8px}
+.ico{font-size:clamp(48px,5vw,96px)}
+table{flex:1;min-width:200px;border-collapse:collapse;font-size:clamp(14px,1.3vw,22px)}td{padding:5px 0;border-bottom:1px solid var(--bd);color:var(--mut)}td+td{text-align:right;color:var(--txt);font-weight:700}
+.tides{display:grid;grid-template-columns:1fr 1fr;gap:10px}.lab{font-size:clamp(11px,1vw,16px);font-weight:800}
+.tt{font-size:clamp(26px,2.6vw,46px);font-weight:800}.ft{color:var(--mut);font-size:clamp(13px,1.1vw,18px)}
+.tsvg{width:100%;height:clamp(50px,6vw,110px);margin-top:8px}.nxt{color:var(--mut);font-size:clamp(11px,.9vw,15px);text-align:right}
+.strip{display:flex;border:1px solid var(--bd);border-radius:14px;overflow:hidden;background:var(--card);flex-wrap:wrap}
+.sun{background:linear-gradient(135deg,#8a3412,#5f220c);padding:clamp(12px,1.4vw,24px);display:flex;align-items:center;gap:14px;min-width:240px}
+.sun .lab{color:#fdba74}.sun .tt{color:#fff}
+.lch{flex:1;padding:clamp(12px,1.4vw,24px);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.lch .lab{color:#38bdf8}.mis{font-size:clamp(18px,1.8vw,32px);font-weight:800}.meta{color:var(--mut);font-size:clamp(11px,1vw,17px)}
+.cd{font-size:clamp(30px,3.6vw,64px);font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bot{display:flex;justify-content:space-between;color:var(--mut);font-size:clamp(11px,.9vw,16px)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--grn);margin-right:6px}
+.err{color:var(--red)}
+</style></head><body><div class="wrap">
+<header><div><h1>IMPORTANT DATA ONLY</h1><div class="date" id="date"></div></div><div class="clock" id="clock"></div></header>
+<div class="grid">
+ <div class="card" id="TSLA"></div><div class="card" id="SPCX"></div>
+ <div class="card"><div class="ttl">Sarasota Weather</div><div id="wx" class="ft">Loading…</div></div>
+ <div class="card"><div class="ttl">Tides · New Pass</div><div id="tide" class="ft">Loading…</div></div>
+</div>
+<div class="strip">
+ <div class="sun"><svg width="56" height="44" viewBox="0 0 56 44"><circle cx="28" cy="26" r="18" fill="#fb923c"/><rect x="0" y="26" width="56" height="18" fill="#6b260e"/><g stroke="#fdba74" stroke-width="3"><line x1="8" y1="30" x2="48" y2="30"/><line x1="12" y1="36" x2="44" y2="36"/><line x1="18" y1="42" x2="38" y2="42"/></g></svg>
+  <div><div class="lab">SARASOTA SUNSET</div><div class="tt" id="sunset">--</div></div></div>
+ <div class="lch"><div><div class="lab" id="lstat">NEXT SPACEX LAUNCH</div><div class="mis" id="mis">Loading…</div><div class="meta" id="lmeta"></div></div><div class="cd" id="cd">T- --:--:--</div></div>
+</div>
+<div class="bot"><span id="upd">Last updated --</span><span><span class="dot" id="dot"></span><span id="onl">Online</span></span></div>
+</div>
+<script>
+const TZ='America/New_York',$=id=>document.getElementById(id);
+const fmtT=d=>new Date(d).toLocaleTimeString('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'});
+const fmtDT=d=>new Date(d).toLocaleString('en-US',{timeZone:TZ,weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+let launchNet=null,ok=true;
+function tick(){const n=new Date();const t=n.toLocaleTimeString('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'}).split(' ');
+ $('clock').innerHTML=`${t[0]}<small>${t[1]} ET</small>`;$('date').textContent=n.toLocaleDateString('en-US',{timeZone:TZ,weekday:'long',month:'long',day:'numeric',year:'numeric'});
+ if(launchNet){let s=Math.round((launchNet-n)/1000),sign=s>=0?'T-':'T+';s=Math.abs(s);const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=s%60,p=v=>String(v).padStart(2,'0');
+  $('cd').textContent=`${sign} ${d?d+'d ':''}${p(h)}:${p(m)}:${p(x)}`;}}
+setInterval(tick,1000);tick();
+async function j(u){const r=await fetch(u);if(!r.ok)throw new Error(u);return r.json()}
+function spark(vals,prev,col){if(!vals.length)return'';const all=vals.concat([prev]),mn=Math.min(...all),mx=Math.max(...all),W=300,H=100,n=vals.length;
+ const X=i=>i/(Math.max(n,78)-1)*W,Y=v=>H-4-(v-mn)/(mx-mn||1)*(H-8);const pts=vals.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+ return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><line x1="0" x2="${W}" y1="${Y(prev)}" y2="${Y(prev)}" stroke="#8a94a8" stroke-dasharray="5 4" stroke-width="1" vector-effect="non-scaling-stroke"/><polygon points="0,${H} ${pts} ${X(n-1)},${H}" fill="${col}" opacity=".22"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="${X(n-1)}" cy="${Y(vals[n-1])}" r="4" fill="${col}"/></svg>`}
+async function stocks(){const d=await j('/api/stocks');for(const q of d.quotes){const up=q.change>=0,c=up?'#2fd27a':'#f05252';
+ $(q.symbol).innerHTML=`<div class="row"><span class="sym">${q.symbol}</span><span class="nm">${q.name}</span></div><div class="stk"><div class="l"><div class="price">$${q.price.toFixed(2)}</div><div class="chg ${up?'up':'dn'}">${up?'▲':'▼'} ${up?'+':''}${q.change.toFixed(2)} (${up?'+':''}${q.pct.toFixed(2)}%)</div></div>${spark(q.series,q.prev,c)}</div><div class="foot"><span>Prev close $${q.prev.toFixed(2)}</span><span>Intraday · 5 min</span></div>`}}
+const icon=c=>c==113?'☀️':c==116?'⛅':[119,122].includes(c)?'☁️':[143,248,260].includes(c)?'🌫️':c>=386?'⛈️':c>=176?'🌧️':'🌤️';
+async function weather(){const w=await j('/api/weather');
+ $('wx').className='';$('wx').innerHTML=`<div class="wx"><div><div class="tmp">${w.temp}°</div><div class="desc">${w.desc}</div></div><div class="ico">${icon(w.code)}</div><table><tr><td>Feels like</td><td>${w.feels}°F</td></tr><tr><td>Humidity</td><td>${w.humidity}%</td></tr><tr><td>Wind</td><td>${w.wind} mph ${w.windDir}</td></tr><tr><td>High / Low</td><td>${w.hi}° / ${w.lo}°</td></tr></table></div>`}
+async function tides(){const t=await j('/api/tides'),now=Date.now();const fut=t.events.filter(e=>new Date(e.t)>now);const H=fut.find(e=>e.type=='H'),L=fut.find(e=>e.type=='L');
+ const after=fut.filter(e=>e!==H&&e!==L)[0];const c=t.curve.filter(p=>{const x=new Date(p.t)-now;return x>-6*3600e3&&x<24*3600e3});
+ const vs=c.map(p=>p.v),mn=Math.min(...vs),mx=Math.max(...vs),t0=new Date(c[0].t),t1=new Date(c[c.length-1].t),W=400,Hh=80;
+ const X=d=>(new Date(d)-t0)/(t1-t0)*W,Y=v=>Hh-4-(v-mn)/(mx-mn||1)*(Hh-8);const pts=c.map(p=>`${X(p.t).toFixed(1)},${Y(p.v).toFixed(1)}`).join(' ');
+ const blk=(lab,col,e)=>e?`<div><div class="lab" style="color:${col}">${lab}</div><div class="tt">${fmtT(e.t)}</div><div class="ft">${e.v.toFixed(1)} ft</div></div>`:'';
+ $('tide').className='';$('tide').innerHTML=`<div class="tides">${blk('NEXT HIGH','#4f9cf0',H)}${blk('NEXT LOW','#a78bfa',L)}</div><svg class="tsvg" viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none"><polygon points="0,${Hh} ${pts} ${W},${Hh}" fill="#4f9cf0" opacity=".2"/><polyline points="${pts}" fill="none" stroke="#4f9cf0" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="${X(now)}" x2="${X(now)}" y1="0" y2="${Hh}" stroke="#eab308" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>${after?`<div class="nxt">${after.type=='H'?'High':'Low'} ${fmtDT(after.t)} · ${after.v.toFixed(1)} ft</div>`:''}`}
+async function sun(){const s=await j('/api/sun');$('sunset').textContent=fmtT(s.sunset)}
+async function launch(){const l=await j('/api/launch');launchNet=new Date(l.net);$('lstat').textContent='NEXT SPACEX LAUNCH · '+(l.status||'').toUpperCase();
+ $('mis').textContent=l.mission;$('lmeta').textContent=[l.rocket,l.pad,l.location&&l.location.split(',')[0],fmtDT(l.net)+' ET'].filter(Boolean).join(' · ');tick()}
+async function run(fns){const r=await Promise.allSettled(fns.map(f=>f()));ok=r.every(x=>x.status=='fulfilled');
+ $('dot').style.background=ok?'#2fd27a':'#f05252';$('onl').textContent=ok?'Online':'Some data unavailable';
+ $('upd').textContent='Last updated '+new Date().toLocaleTimeString('en-US',{timeZone:TZ})+' ET'}
+run([stocks,weather,tides,sun,launch]);
+setInterval(()=>run([stocks]),60e3);setInterval(()=>run([weather,tides]),15*60e3);setInterval(()=>run([sun,launch]),60*60e3);
+</script></body></html>
